@@ -11,22 +11,29 @@ export default function VehicleLayout() {
 
   if (loading) {
     return (
-      <div style={{ padding: '60px', textAlign: 'center', color: '#3B82F6', fontSize: '16px' }}>
+      <div style={{ padding: '60px', textAlign: 'center', color: '#547792', fontSize: '16px' }}>
         載入中...
       </div>
     );
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#EAE0CF', minHeight: '100vh' }}>
       {isAdmin && (
-        <div style={{ padding: '8px 16px', display: 'flex', gap: '8px', alignItems: 'center', backgroundColor: '#EFF6FF', borderBottom: '1px solid #DBEAFE' }}>
+        <div style={{
+          padding: '8px 16px',
+          display: 'flex',
+          gap: '8px',
+          alignItems: 'center',
+          backgroundColor: '#D2C4B4',
+          borderBottom: '1px solid #AACDDC',
+        }}>
           <button
             onClick={() => setLayoutEditing(v => !v)}
             style={{
-              backgroundColor: layoutEditing ? '#1D4ED8' : '#E0EAFF',
-              color: layoutEditing ? 'white' : '#1D4ED8',
-              border: '1.5px solid #93C5FD',
+              backgroundColor: layoutEditing ? '#213448' : '#547792',
+              color: 'white',
+              border: 'none',
               borderRadius: '8px',
               padding: '6px 14px',
               cursor: 'pointer',
@@ -34,52 +41,52 @@ export default function VehicleLayout() {
               fontWeight: 600,
             }}
           >
-            {layoutEditing ? '✓ 版面編輯中（點此結束）' : '⊞ 調整區塊位置'}
+            {layoutEditing ? '✓ 結束版面編輯' : '⊞ 調整區塊位置'}
           </button>
           {layoutEditing && (
-            <span style={{ fontSize: '12px', color: '#6B7280' }}>可拖曳 / 縮放區塊</span>
+            <span style={{ fontSize: '12px', color: '#547792' }}>可拖曳 / 縮放區塊</span>
           )}
         </div>
       )}
-    <div style={{
-      overflowX: 'auto',
-      overflowY: 'visible',
-      WebkitOverflowScrolling: 'touch',
-      padding: '16px',
-      touchAction: layoutEditing ? 'none' : 'auto',
-    }}>
       <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-        minWidth: 'max-content',
+        overflowX: 'auto',
+        overflowY: 'visible',
+        WebkitOverflowScrolling: 'touch',
+        padding: '16px',
+        touchAction: layoutEditing ? 'none' : 'auto',
       }}>
-        {/* Vehicle cab — horizontal decorative bar at top */}
         <div style={{
-          height: 44,
-          width: '100%',
-          backgroundColor: '#93C5FD',
-          borderRadius: '12px 12px 4px 4px',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '2px solid #60A5FA',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-          boxSizing: 'border-box',
+          gap: '14px',
+          alignItems: 'flex-start',
+          minWidth: 'max-content',
         }}>
-          <span style={{
-            fontSize: '14px',
-            fontWeight: 700,
-            color: '#1E40AF',
-            letterSpacing: '0.3em',
-            userSelect: 'none',
+          {/* Vehicle cab — vertical decorative strip on the left (front of van) */}
+          <div style={{
+            width: 36,
+            alignSelf: 'stretch',
+            backgroundColor: '#94B4C1',
+            borderRadius: '10px 4px 4px 10px',
+            border: '2px solid #547792',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: '2px 0 6px rgba(0,0,0,0.08)',
           }}>
-            ── 車頭 ──
-          </span>
-        </div>
+            <span style={{
+              fontSize: '12px',
+              fontWeight: 700,
+              color: '#213448',
+              writingMode: 'vertical-rl',
+              letterSpacing: '0.25em',
+              userSelect: 'none',
+            }}>
+              車頭
+            </span>
+          </div>
 
-        {/* Floor + Wall side by side */}
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+          {/* Floor + Wall side by side */}
           <FloorArea
             blocks={floorBlocks}
             isAdmin={isAdmin}
@@ -98,7 +105,6 @@ export default function VehicleLayout() {
           />
         </div>
       </div>
-    </div>
     </div>
   );
 }

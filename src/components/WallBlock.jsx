@@ -42,37 +42,37 @@ export default function WallBlock({ block, isAdmin, layoutEditing, onUpdate, onD
         style={{
           width: '100%',
           height: `${height}px`,
-          backgroundColor: block.color || '#BFDBFE',
-          border: '2px solid rgba(30,64,175,0.25)',
-          borderRadius: '10px',
+          backgroundColor: block.color || '#F3E3D0',
+          border: '1.5px solid rgba(33,52,72,0.15)',
+          borderRadius: '8px',
           padding: '8px 10px',
           boxSizing: 'border-box',
           overflow: 'hidden',
           position: 'relative',
           cursor: 'pointer',
           userSelect: 'none',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.08)',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.07)',
           flexShrink: 0,
         }}
       >
         {/* Admin toolbar */}
-        {isAdmin && (
-          <div style={{ position: 'absolute', top: 4, right: 4, display: 'flex', gap: '3px', zIndex: 1 }}>
+        {isAdmin && !layoutEditing && (
+          <div style={{ position: 'absolute', top: 3, right: 3, display: 'flex', gap: '3px', zIndex: 1 }}>
             <button
               onClick={e => { e.stopPropagation(); setModalOpen(true); }}
-              style={iconBtn('#3B82F6')}
+              style={iconBtn('#547792')}
               title="編輯"
             >✏️</button>
             <button
               onClick={e => { e.stopPropagation(); if (window.confirm('確定刪除此區塊？')) onDelete(block.id); }}
-              style={iconBtn('#EF4444')}
+              style={iconBtn('#8B4444')}
               title="刪除"
             >🗑️</button>
           </div>
         )}
 
         {/* Items */}
-        <div style={{ marginTop: isAdmin ? '22px' : '0', overflow: 'hidden' }}>
+        <div style={{ marginTop: (isAdmin && !layoutEditing) ? '22px' : '0', overflow: 'hidden' }}>
           {items.length > 0 ? items.map(item => (
             <div key={item.id} style={{
               display: 'flex',
@@ -80,7 +80,7 @@ export default function WallBlock({ block, isAdmin, layoutEditing, onUpdate, onD
               gap: '4px',
               fontSize: '12px',
               lineHeight: '1.6',
-              color: '#1E3A5F',
+              color: '#213448',
             }}>
               <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {item.name}
@@ -88,8 +88,8 @@ export default function WallBlock({ block, isAdmin, layoutEditing, onUpdate, onD
               <span style={{ fontWeight: 700, flexShrink: 0 }}>×{item.quantity}</span>
             </div>
           )) : (
-            <div style={{ fontSize: '12px', color: '#93C5FD', fontStyle: 'italic' }}>
-              {isAdmin ? '點擊 ✏️ 新增品項' : '（空）'}
+            <div style={{ fontSize: '12px', color: '#D2C4B4', fontStyle: 'italic' }}>
+              {isAdmin ? '點 ✏️ 新增品項' : '（空）'}
             </div>
           )}
         </div>
@@ -106,10 +106,10 @@ export default function WallBlock({ block, isAdmin, layoutEditing, onUpdate, onD
               position: 'absolute',
               bottom: 2,
               right: 2,
-              width: 14,
-              height: 14,
+              width: 16,
+              height: 16,
               cursor: 's-resize',
-              backgroundColor: 'rgba(30,64,175,0.3)',
+              backgroundColor: 'rgba(33,52,72,0.35)',
               borderRadius: '3px',
               touchAction: 'none',
             }}

@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <>
     <header style={{
-      backgroundColor: '#1E40AF',
+      backgroundColor: '#213448',
       color: 'white',
       padding: '12px 16px',
       display: 'flex',
@@ -15,7 +15,7 @@ export default function Header() {
       position: 'sticky',
       top: 0,
       zIndex: 100,
-      boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <span style={{ fontSize: '22px' }}>🚐</span>
@@ -26,7 +26,7 @@ export default function Header() {
           {isAdmin && (
             <span style={{
               fontSize: '11px',
-              backgroundColor: '#3B82F6',
+              backgroundColor: '#34699A',
               padding: '1px 7px',
               borderRadius: '9999px',
               fontWeight: 600,
@@ -41,10 +41,10 @@ export default function Header() {
         {user ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '11px', opacity: 0.85, maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: '11px', opacity: 0.8, maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {user.email}
               </div>
-              <div style={{ fontSize: '11px', color: isAdmin ? '#86EFAC' : '#FCA5A5', fontWeight: 600 }}>
+              <div style={{ fontSize: '11px', color: isAdmin ? '#94B4C1' : '#F3E3D0', fontWeight: 600 }}>
                 {isAdmin ? '✓ 管理員' : '訪客'}
               </div>
             </div>
@@ -52,7 +52,7 @@ export default function Header() {
               onClick={logout}
               style={{
                 backgroundColor: 'transparent',
-                border: '1px solid rgba(255,255,255,0.5)',
+                border: '1px solid rgba(255,255,255,0.4)',
                 color: 'white',
                 padding: '5px 12px',
                 borderRadius: '6px',
@@ -68,14 +68,14 @@ export default function Header() {
           <button
             onClick={login}
             style={{
-              backgroundColor: 'white',
-              color: '#1E40AF',
+              backgroundColor: '#EAE0CF',
+              color: '#213448',
               border: 'none',
               padding: '7px 14px',
               borderRadius: '6px',
               cursor: 'pointer',
               fontSize: '14px',
-              fontWeight: 600,
+              fontWeight: 700,
             }}
           >
             Google 登入
@@ -94,6 +94,6 @@ export default function Header() {
         登入錯誤：{loginError}
       </div>
     )}
-  </>
+    </>
   );
 }

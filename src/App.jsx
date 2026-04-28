@@ -3,7 +3,7 @@ import VehicleLayout from './components/VehicleLayout';
 
 export default function App() {
   return (
-    <div style={{ backgroundColor: '#EFF6FF', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#EAE0CF', minHeight: '100vh' }}>
       <Header />
       <VehicleLayout />
     </div>

@@ -6,7 +6,7 @@ const MIN_H = 60;
 
 export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, containerH, onUpdate, onDelete }) {
   const [pos, setPos] = useState({ x: block.x ?? 20, y: block.y ?? 20 });
-  const [size, setSize] = useState({ w: block.width ?? 160, h: block.height ?? 110 });
+  const [size, setSize] = useState({ w: block.width ?? 140, h: block.height ?? 100 });
   const [modalOpen, setModalOpen] = useState(false);
 
   const blockRef = useRef(null);
@@ -16,7 +16,7 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
   useEffect(() => {
     if (!dragRef.current && !resizeRef.current) {
       setPos({ x: block.x ?? 20, y: block.y ?? 20 });
-      setSize({ w: block.width ?? 160, h: block.height ?? 110 });
+      setSize({ w: block.width ?? 140, h: block.height ?? 100 });
     }
   }, [block.x, block.y, block.width, block.height]);
 
@@ -102,9 +102,9 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
           top: pos.y,
           width: size.w,
           height: size.h,
-          backgroundColor: block.color || '#BFDBFE',
-          border: '2px solid rgba(30,64,175,0.25)',
-          borderRadius: '10px',
+          backgroundColor: block.color || '#AACDDC',
+          border: '1.5px solid rgba(33,52,72,0.2)',
+          borderRadius: '8px',
           padding: '6px 7px',
           boxSizing: 'border-box',
           overflow: 'hidden',
@@ -115,25 +115,25 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
         }}
       >
         {/* Admin toolbar */}
-        {isAdmin && (
-          <div data-nondrag style={{ position: 'absolute', top: 4, right: 4, display: 'flex', gap: '3px', zIndex: 1 }}>
+        {isAdmin && !layoutEditing && (
+          <div data-nondrag style={{ position: 'absolute', top: 3, right: 3, display: 'flex', gap: '3px', zIndex: 1 }}>
             <button
               data-nondrag
               onClick={e => { e.stopPropagation(); setModalOpen(true); }}
-              style={iconBtn('#3B82F6')}
+              style={iconBtn('#547792')}
               title="編輯"
             >✏️</button>
             <button
               data-nondrag
               onClick={e => { e.stopPropagation(); if (window.confirm('確定刪除此區塊？')) onDelete(block.id); }}
-              style={iconBtn('#EF4444')}
+              style={iconBtn('#8B4444')}
               title="刪除"
             >🗑️</button>
           </div>
         )}
 
         {/* Items */}
-        <div style={{ marginTop: isAdmin ? '22px' : '0', overflow: 'hidden', height: '100%' }}>
+        <div style={{ marginTop: (isAdmin && !layoutEditing) ? '22px' : '0', overflow: 'hidden', height: '100%' }}>
           {items.length > 0 ? items.map(item => (
             <div key={item.id} style={{
               display: 'flex',
@@ -141,7 +141,7 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
               gap: '4px',
               fontSize: '11px',
               lineHeight: '1.5',
-              color: '#1E3A5F',
+              color: '#213448',
             }}>
               <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 1 }}>
                 {item.name}
@@ -149,8 +149,8 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
               <span style={{ fontWeight: 700, flexShrink: 0 }}>×{item.quantity}</span>
             </div>
           )) : (
-            <div style={{ fontSize: '11px', color: '#93C5FD', fontStyle: 'italic', paddingTop: '2px' }}>
-              {isAdmin ? '點擊 ✏️ 新增品項' : '（空）'}
+            <div style={{ fontSize: '11px', color: '#547792', fontStyle: 'italic', paddingTop: '2px', opacity: 0.7 }}>
+              {isAdmin ? '點 ✏️ 新增品項' : '（空）'}
             </div>
           )}
         </div>
@@ -167,10 +167,10 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
               position: 'absolute',
               bottom: 2,
               right: 2,
-              width: 14,
-              height: 14,
+              width: 16,
+              height: 16,
               cursor: 'nwse-resize',
-              backgroundColor: 'rgba(30,64,175,0.3)',
+              backgroundColor: 'rgba(33,52,72,0.35)',
               borderRadius: '3px',
               touchAction: 'none',
             }}
