@@ -1,9 +1,10 @@
 import { useAuth } from '../hooks/useAuth';
 
 export default function Header() {
-  const { user, isAdmin, login, logout } = useAuth();
+  const { user, isAdmin, login, logout, loginError } = useAuth();
 
   return (
+    <>
     <header style={{
       backgroundColor: '#1E40AF',
       color: 'white',
@@ -82,5 +83,17 @@ export default function Header() {
         )}
       </div>
     </header>
+    {loginError && (
+      <div style={{
+        backgroundColor: '#FEE2E2',
+        color: '#991B1B',
+        fontSize: '13px',
+        padding: '8px 16px',
+        textAlign: 'center',
+      }}>
+        登入錯誤：{loginError}
+      </div>
+    )}
+  </>
   );
 }
