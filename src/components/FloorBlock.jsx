@@ -102,32 +102,30 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
           top: pos.y,
           width: size.w,
           height: size.h,
-          backgroundColor: block.color || '#AACDDC',
-          border: '1.5px solid rgba(33,52,72,0.2)',
+          backgroundColor: block.color || '#E0F2FE',
+          border: '1.5px solid rgba(78,110,129,0.25)',
           borderRadius: '8px',
-          padding: '6px 7px',
+          padding: '6px 8px',
           boxSizing: 'border-box',
           overflow: 'hidden',
           cursor: layoutEditing ? 'grab' : 'pointer',
           userSelect: 'none',
           touchAction: layoutEditing ? 'none' : 'auto',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.08)',
         }}
       >
-        {/* Admin toolbar */}
+        {/* Admin edit/delete toolbar — only when NOT in layout edit mode */}
         {isAdmin && !layoutEditing && (
           <div data-nondrag style={{ position: 'absolute', top: 3, right: 3, display: 'flex', gap: '3px', zIndex: 1 }}>
             <button
               data-nondrag
               onClick={e => { e.stopPropagation(); setModalOpen(true); }}
-              style={iconBtn('#547792')}
-              title="編輯"
+              style={iconBtn('#7895B2')}
             >✏️</button>
             <button
               data-nondrag
               onClick={e => { e.stopPropagation(); if (window.confirm('確定刪除此區塊？')) onDelete(block.id); }}
-              style={iconBtn('#8B4444')}
-              title="刪除"
+              style={iconBtn('#A0937D')}
             >🗑️</button>
           </div>
         )}
@@ -140,22 +138,22 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
               justifyContent: 'space-between',
               gap: '4px',
               fontSize: '11px',
-              lineHeight: '1.5',
-              color: '#213448',
+              lineHeight: '1.55',
+              color: '#2C3333',
             }}>
               <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 1 }}>
                 {item.name}
               </span>
-              <span style={{ fontWeight: 700, flexShrink: 0 }}>×{item.quantity}</span>
+              <span style={{ fontWeight: 700, flexShrink: 0, color: '#4E6E81' }}>×{item.quantity}</span>
             </div>
           )) : (
-            <div style={{ fontSize: '11px', color: '#547792', fontStyle: 'italic', paddingTop: '2px', opacity: 0.7 }}>
-              {isAdmin ? '點 ✏️ 新增品項' : '（空）'}
+            <div style={{ fontSize: '11px', color: '#6B7280', fontStyle: 'italic', paddingTop: '2px' }}>
+              {isAdmin && !layoutEditing ? '點 ✏️ 新增品項' : '（空）'}
             </div>
           )}
         </div>
 
-        {/* Resize handle */}
+        {/* Resize handle — only in layout edit mode */}
         {isAdmin && layoutEditing && (
           <div
             data-nondrag
@@ -170,7 +168,7 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
               width: 16,
               height: 16,
               cursor: 'nwse-resize',
-              backgroundColor: 'rgba(33,52,72,0.35)',
+              backgroundColor: 'rgba(78,110,129,0.4)',
               borderRadius: '3px',
               touchAction: 'none',
             }}

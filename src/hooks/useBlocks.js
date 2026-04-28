@@ -4,7 +4,11 @@ import {
 } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
-const COLORS = ['#AACDDC', '#81A6C6', '#94B4C1', '#58A0C8', '#D2C4B4', '#F3E3D0', '#EAE0CF', '#FDF5AA'];
+const COLORS = [
+  '#FEF9C3', '#DCFCE7', '#F3E8FF', '#FFE4E6',
+  '#E0F2FE', '#FFEDD5', '#F0FDFA', '#F5F5F4',
+  '#FFEDFA', '#ECFCCB',
+];
 
 export function useBlocks() {
   const [blocks, setBlocks] = useState([]);
