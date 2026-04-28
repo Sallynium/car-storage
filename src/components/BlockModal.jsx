@@ -232,16 +232,26 @@ export default function BlockModal({ block, isAdmin, onClose, onUpdate }) {
           </div>
         )}
 
-        {/* Footer button */}
-        {isAdmin ? (
-          <button onClick={handleSave} style={{ ...btnPrimary, width: '100%', padding: '13px' }}>
-            儲存所有變更
-          </button>
-        ) : (
-          <button onClick={onClose} style={{ ...btnSecondary, width: '100%', padding: '13px' }}>
-            關閉
-          </button>
-        )}
+        {/* Footer button — sticky so it's always visible */}
+        <div style={{
+          position: 'sticky',
+          bottom: 0,
+          backgroundColor: 'white',
+          paddingTop: '10px',
+          paddingBottom: '4px',
+          borderTop: '1px solid #E5E7EB',
+          marginTop: '4px',
+        }}>
+          {isAdmin ? (
+            <button onClick={handleSave} style={{ ...btnPrimary, width: '100%', padding: '13px' }}>
+              儲存所有變更
+            </button>
+          ) : (
+            <button onClick={onClose} style={{ ...btnSecondary, width: '100%', padding: '13px' }}>
+              關閉
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

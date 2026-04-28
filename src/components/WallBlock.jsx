@@ -3,7 +3,7 @@ import BlockModal from './BlockModal';
 
 const MIN_H = 60;
 
-export default function WallBlock({ block, isAdmin, onUpdate, onDelete }) {
+export default function WallBlock({ block, isAdmin, layoutEditing, onUpdate, onDelete }) {
   const [height, setHeight] = useState(block.height ?? 120);
   const [modalOpen, setModalOpen] = useState(false);
   const resizeRef = useRef(null);
@@ -95,7 +95,7 @@ export default function WallBlock({ block, isAdmin, onUpdate, onDelete }) {
         </div>
 
         {/* Resize handle (height only) */}
-        {isAdmin && (
+        {isAdmin && layoutEditing && (
           <div
             onPointerDown={onResizePointerDown}
             onPointerMove={onResizePointerMove}

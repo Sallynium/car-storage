@@ -14,7 +14,7 @@ const addBtnStyle = {
   fontWeight: 600,
 };
 
-export default function FloorArea({ blocks, isAdmin, onAdd, onUpdate, onDelete }) {
+export default function FloorArea({ blocks, isAdmin, layoutEditing, onAdd, onUpdate, onDelete }) {
   return (
     <div style={{ flexShrink: 0 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
@@ -45,6 +45,7 @@ export default function FloorArea({ blocks, isAdmin, onAdd, onUpdate, onDelete }
             key={block.id}
             block={block}
             isAdmin={isAdmin}
+            layoutEditing={layoutEditing}
             containerW={W}
             containerH={H}
             onUpdate={onUpdate}

@@ -11,7 +11,7 @@ const addBtnStyle = {
   fontWeight: 600,
 };
 
-export default function WallArea({ blocks, isAdmin, onAdd, onUpdate, onDelete }) {
+export default function WallArea({ blocks, isAdmin, layoutEditing, onAdd, onUpdate, onDelete }) {
   return (
     <div style={{ width: 240, flexShrink: 0 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
@@ -44,6 +44,7 @@ export default function WallArea({ blocks, isAdmin, onAdd, onUpdate, onDelete })
             key={block.id}
             block={block}
             isAdmin={isAdmin}
+            layoutEditing={layoutEditing}
             onUpdate={onUpdate}
             onDelete={onDelete}
           />

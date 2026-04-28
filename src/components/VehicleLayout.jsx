@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useBlocks } from '../hooks/useBlocks';
 import FloorArea from './FloorArea';
@@ -6,6 +7,7 @@ import WallArea from './WallArea';
 export default function VehicleLayout() {
   const { isAdmin } = useAuth();
   const { floorBlocks, wallBlocks, loading, addBlock, updateBlock, deleteBlock } = useBlocks();
+  const [layoutEditing, setLayoutEditing] = useState(false);
 
   if (loading) {
     return (
@@ -16,11 +18,35 @@ export default function VehicleLayout() {
   }
 
   return (
+    <div>
+      {isAdmin && (
+        <div style={{ padding: '8px 16px', display: 'flex', gap: '8px', alignItems: 'center', backgroundColor: '#EFF6FF', borderBottom: '1px solid #DBEAFE' }}>
+          <button
+            onClick={() => setLayoutEditing(v => !v)}
+            style={{
+              backgroundColor: layoutEditing ? '#1D4ED8' : '#E0EAFF',
+              color: layoutEditing ? 'white' : '#1D4ED8',
+              border: '1.5px solid #93C5FD',
+              borderRadius: '8px',
+              padding: '6px 14px',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 600,
+            }}
+          >
+            {layoutEditing ? '✓ 版面編輯中（點此結束）' : '⊞ 調整區塊位置'}
+          </button>
+          {layoutEditing && (
+            <span style={{ fontSize: '12px', color: '#6B7280' }}>可拖曳 / 縮放區塊</span>
+          )}
+        </div>
+      )}
     <div style={{
       overflowX: 'auto',
       overflowY: 'visible',
       WebkitOverflowScrolling: 'touch',
       padding: '16px',
+      touchAction: layoutEditing ? 'none' : 'auto',
     }}>
       <div style={{
         display: 'flex',
@@ -57,6 +83,7 @@ export default function VehicleLayout() {
           <FloorArea
             blocks={floorBlocks}
             isAdmin={isAdmin}
+            layoutEditing={layoutEditing}
             onAdd={() => addBlock('floor')}
             onUpdate={updateBlock}
             onDelete={deleteBlock}
@@ -64,12 +91,14 @@ export default function VehicleLayout() {
           <WallArea
             blocks={wallBlocks}
             isAdmin={isAdmin}
+            layoutEditing={layoutEditing}
             onAdd={() => addBlock('wall')}
             onUpdate={updateBlock}
             onDelete={deleteBlock}
           />
         </div>
       </div>
+    </div>
     </div>
   );
 }

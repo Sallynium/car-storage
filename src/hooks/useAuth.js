@@ -20,7 +20,8 @@ export function useAuth() {
     return unsubscribe;
   }, []);
 
-  const isAdmin = !!(user && user.email === import.meta.env.VITE_ADMIN_EMAIL);
+  const adminEmails = (import.meta.env.VITE_ADMIN_EMAIL || '').split(',').map(e => e.trim()).filter(Boolean);
+  const isAdmin = !!(user && adminEmails.includes(user.email));
 
   const login = async () => {
     setLoginError(null);

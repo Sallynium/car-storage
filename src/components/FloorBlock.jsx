@@ -4,7 +4,7 @@ import BlockModal from './BlockModal';
 const MIN_W = 80;
 const MIN_H = 60;
 
-export default function FloorBlock({ block, isAdmin, containerW, containerH, onUpdate, onDelete }) {
+export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, containerH, onUpdate, onDelete }) {
   const [pos, setPos] = useState({ x: block.x ?? 20, y: block.y ?? 20 });
   const [size, setSize] = useState({ w: block.width ?? 160, h: block.height ?? 110 });
   const [modalOpen, setModalOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function FloorBlock({ block, isAdmin, containerW, containerH, onU
 
   /* ---- Drag ---- */
   const onBlockPointerDown = (e) => {
-    if (!isAdmin) return;
+    if (!isAdmin || !layoutEditing) return;
     if (e.target.closest('[data-nondrag]')) return;
     e.preventDefault();
     blockRef.current.setPointerCapture(e.pointerId);
@@ -91,11 +91,11 @@ export default function FloorBlock({ block, isAdmin, containerW, containerH, onU
     <>
       <div
         ref={blockRef}
-        onPointerDown={isAdmin ? onBlockPointerDown : undefined}
-        onPointerMove={isAdmin ? onBlockPointerMove : undefined}
-        onPointerUp={isAdmin ? onBlockPointerUp : undefined}
-        onPointerCancel={isAdmin ? () => { dragRef.current = null; } : undefined}
-        onClick={!isAdmin ? () => setModalOpen(true) : undefined}
+        onPointerDown={layoutEditing ? onBlockPointerDown : undefined}
+        onPointerMove={layoutEditing ? onBlockPointerMove : undefined}
+        onPointerUp={layoutEditing ? onBlockPointerUp : undefined}
+        onPointerCancel={layoutEditing ? () => { dragRef.current = null; } : undefined}
+        onClick={!layoutEditing ? () => setModalOpen(true) : undefined}
         style={{
           position: 'absolute',
           left: pos.x,
@@ -108,9 +108,9 @@ export default function FloorBlock({ block, isAdmin, containerW, containerH, onU
           padding: '6px 7px',
           boxSizing: 'border-box',
           overflow: 'hidden',
-          cursor: isAdmin ? 'grab' : 'pointer',
+          cursor: layoutEditing ? 'grab' : 'pointer',
           userSelect: 'none',
-          touchAction: isAdmin ? 'none' : 'auto',
+          touchAction: layoutEditing ? 'none' : 'auto',
           boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
         }}
       >
@@ -156,7 +156,7 @@ export default function FloorBlock({ block, isAdmin, containerW, containerH, onU
         </div>
 
         {/* Resize handle */}
-        {isAdmin && (
+        {isAdmin && layoutEditing && (
           <div
             data-nondrag
             onPointerDown={onResizePointerDown}
