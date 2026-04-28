@@ -41,14 +41,9 @@ export default function Header() {
         <div>
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '11px', opacity: 0.8, maxWidth: '140px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {user.email}
-                </div>
-                <div style={{ fontSize: '11px', color: isAdmin ? '#A8D5E2' : '#E1D4BB', fontWeight: 600 }}>
-                  {isAdmin ? '✓ 管理員' : '訪客'}
-                </div>
-              </div>
+              {!isAdmin && (
+                <span style={{ fontSize: '12px', color: '#E1D4BB' }}>訪客</span>
+              )}
               <button
                 onClick={logout}
                 style={{
