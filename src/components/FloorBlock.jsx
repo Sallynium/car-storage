@@ -4,7 +4,7 @@ import BlockModal from './BlockModal';
 const MIN_W = 80;
 const MIN_H = 60;
 
-export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, containerH, onUpdate, onDelete }) {
+export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, containerH, scale = 1, onUpdate, onDelete }) {
   const [pos, setPos] = useState({ x: block.x ?? 20, y: block.y ?? 20 });
   const [size, setSize] = useState({ w: block.width ?? 140, h: block.height ?? 100 });
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,8 +35,8 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
 
   const onBlockPointerMove = (e) => {
     if (!dragRef.current) return;
-    const dx = e.clientX - dragRef.current.startPX;
-    const dy = e.clientY - dragRef.current.startPY;
+    const dx = (e.clientX - dragRef.current.startPX) / scale;
+    const dy = (e.clientY - dragRef.current.startPY) / scale;
     if (Math.abs(dx) > 4 || Math.abs(dy) > 4) dragRef.current.moved = true;
     if (!dragRef.current.moved) return;
     const nx = Math.max(0, Math.min(containerW - size.w, dragRef.current.startBX + dx));
@@ -70,8 +70,8 @@ export default function FloorBlock({ block, isAdmin, layoutEditing, containerW, 
 
   const onResizePointerMove = (e) => {
     if (!resizeRef.current) return;
-    const dx = e.clientX - resizeRef.current.startPX;
-    const dy = e.clientY - resizeRef.current.startPY;
+    const dx = (e.clientX - resizeRef.current.startPX) / scale;
+    const dy = (e.clientY - resizeRef.current.startPY) / scale;
     const nw = Math.max(MIN_W, resizeRef.current.startW + dx);
     const nh = Math.max(MIN_H, resizeRef.current.startH + dy);
     resizeRef.current.finalW = nw;
