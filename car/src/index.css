@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-header: #3D5A6C;
+  --color-toolbar: #D6C9AF;
+  --color-bg: #F4F8FA;
+  --color-canvas: #E8F0F4;
+
+  --view-floor: #4E6E81;
+  --view-left: #6B8E7F;
+  --view-right: #7F6B8E;
+  --view-front: #8E7F6B;
+  --view-cabin: #6B7F8E;
+
+  --sticky-yellow:  #FEF9C3;
+  --sticky-green:   #DCFCE7;
+  --sticky-purple:  #F3E8FF;
+  --sticky-pink:    #FFE4E6;
+  --sticky-blue:    #E0F2FE;
+  --sticky-orange:  #FFEDD5;
+  --sticky-teal:    #F0FDFA;
+  --sticky-stone:   #F5F5F4;
+  --sticky-fuchsia: #FFEDFA;
+  --sticky-lime:    #ECFCCB;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-bg);
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E1D4BB;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7895B2;
+  border-radius: 3px;
+}
+
+/* Hide scrollbar on nav strip */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

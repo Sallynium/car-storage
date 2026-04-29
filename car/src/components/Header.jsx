@@ -86,7 +86,6 @@ export default function Header() {
           fontSize: '13px',
           padding: '8px 16px',
           textAlign: 'center',
-          color: '#2C3333',
         }}>
           登入錯誤：{loginError}
         </div>
